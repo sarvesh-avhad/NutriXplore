@@ -41,5 +41,3 @@ NutriXplore was developed as a group project by:
 ## 📬 Feedback  
 We’d love to hear your suggestions and improvements! Feel free to fork the repo, open issues, or submit PRs.  
 
-👉 Check out the LinkedIn post here: (https://www.linkedin.com/posts/sumit-kapse-756921282_ai-deeplearning-mobilenetv3-activity-7371599952218664962-SQez?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAETV-PIBWT-5v5ez3GjdzFPCCtUw-Kl3lNI)  
- 
