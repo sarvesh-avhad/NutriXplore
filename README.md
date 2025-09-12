@@ -31,8 +31,8 @@ NutriXplore is a **Streamlit web app** that identifies Indian food items from im
 
 ## 👨‍💻 Team  
 NutriXplore was developed as a group project by:  
-- Sumit Kapse  
 - Sarvesh Avhad  
+- Sumit Kapse  
 - Ranjit Bhogil  
 - Advait Dahitule  
 
