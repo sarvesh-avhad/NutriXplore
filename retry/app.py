@@ -1,3 +1,6 @@
+from tensorflow.keras.applications import MobileNetV2
+from tensorflow.keras.layers import GlobalAveragePooling2D, Dense, Dropout
+from tensorflow.keras.models import Sequential
 import streamlit as st
 import tensorflow as tf
 from tensorflow.keras.models import load_model
@@ -9,25 +12,29 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.layers import InputLayer
 
 # ---------------------------
-# Patch InputLayer to ignore batch_shape during deserialization
+# Define Model Architecture and Load Weights
 # ---------------------------
-_orig_init = InputLayer.__init__
+def create_model():
+    # Use MobileNetV2 as the base model
+    base_model = MobileNetV2(input_shape=(224, 224, 3), include_top=False, weights=None)
+    base_model.trainable = False # Freeze the base model layers
 
-def patched_init(self, *args, **kwargs):
-    if 'batch_shape' in kwargs:
-        kwargs.pop('batch_shape')  # remove batch_shape
-    _orig_init(self, *args, **kwargs)
+    # Create your custom model on top
+    model = Sequential([
+        base_model,
+        GlobalAveragePooling2D(),
+        Dense(128, activation='relu'),
+        Dropout(0.5),
+        Dense(20, activation='softmax')  # 20 food classes
+    ])
+    return model
 
-InputLayer.__init__ = patched_init
+# Create the model structure
+model = create_model()
 
-# ---------------------------
-# Load the trained model
-# ---------------------------
-model = load_model(
-    "retry/indian_food_classifier_mobilenetv5.keras",
-    compile=False,
-    custom_objects={'dtype': tf.float32}
-)
+# Load the saved weights into the model
+model.load_weights("retry/indian_food_classifier_mobilenetv5.keras")
+
 # ---------------------------
 # Food classes
 # ---------------------------
